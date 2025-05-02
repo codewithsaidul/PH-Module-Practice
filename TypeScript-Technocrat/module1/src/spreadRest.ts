@@ -35,5 +35,5 @@
     return friends.map((friend: string) => `Hi ${friend}`);
   }
 
-  console.log(restOp("numan", "kulsuma", "sangita", "jubayer"));
+//   console.log(restOp("numan", "kulsuma", "sangita", "jubayer"));
 }
