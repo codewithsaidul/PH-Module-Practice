@@ -44,5 +44,7 @@
         }
     }
 
-    console.log(name, phone, isMaride, friends, myTuple, car, normalAdd(71, 29), arrowAdd(71, 21), toyata.actions("drive"))
+    // console.log(name, phone, isMaride, friends, myTuple, car, normalAdd(71, 29), arrowAdd(71, 21), toyata.actions("drive"))
+
+    
 }
