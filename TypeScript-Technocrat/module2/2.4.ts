@@ -72,9 +72,9 @@
     },
     bike: {
       isHaveBike: true,
-      brand: "Yamaha",
-      model: "FZ-S V5",
-      engineCapacity: "155CC",
+      brand: "Kawashaki",
+      model: "Ninja H2R",
+      engineCapacity: "988CC",
       color: "Olive Green",
     },
   };
