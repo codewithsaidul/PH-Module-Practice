@@ -1,23 +1,26 @@
 {
-    // conditional types in typescript
+  // conditional types in typescript
 
-    type a = number;
-    type b = string;
+  type a = number;
+  type b = string;
 
-    // conditionaly checking 
-    type c = a extends null ? "Its Null" : "Its not null";
+  // conditionaly checking
+  type c = a extends null ? "Its Null" : "Its not null";
 
-    // nested type checking
-    type d = a extends null ? "yeah im null" : b extends undefined ? "yeah im undefined" : "Im not null or undefined"
+  // nested type checking
+  type d = a extends null
+    ? "yeah im null"
+    : b extends undefined
+    ? "yeah im undefined"
+    : "Im not null or undefined";
 
-    type Sheikh = {
-        bike: string;
-        car: string;
-        helicopter: string
-    }
+  type Sheikh = {
+    bike: string;
+    car: string;
+    helicopter: string;
+  };
 
+  type checkVechicle<T> = T extends keyof Sheikh ? true : false;
 
-    type checkVechicle<T> = T extends keyof Sheikh ? true : false
-
-    type hasBike = checkVechicle<"train">
+  type hasBike = checkVechicle<"train">;
 }
