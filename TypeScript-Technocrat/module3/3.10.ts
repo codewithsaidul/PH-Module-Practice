@@ -3,7 +3,7 @@
     class BankAccount {
         readonly id: number;
         name: string;
-        protected _balance: number; // Encapsuated
+        protected _balance: number; // Encapsulated
 
         constructor(id: number, name: string, balance: number) {
             this.id = id;
