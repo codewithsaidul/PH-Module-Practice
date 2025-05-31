@@ -37,6 +37,7 @@ fs.readFile("./hello.txt", { encoding: "utf-8"}, (err, data) => {
 })
 
 
+
 console.log(`task 2: ${txt}`)
 
 console.log("task 3")
