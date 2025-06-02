@@ -28,11 +28,25 @@ todosRouter.get("/:id", async (req: Request, res: Response) => {
 
   const todos = await collection.findOne(query);
 
-// console.log(todos)
-
-  // const todos = await cursor.toArray();
 
   res.send(todos);
+});
+
+
+// delete a single todo by id
+todosRouter.delete("/delete/:id", async (req: Request, res: Response) => {
+  const todoId = req.params.id
+
+  // console.log(todoId)
+
+  const query = { _id: new ObjectId(todoId)}
+
+  await collection.deleteOne(query);
+
+  const cursor = collection.find({});
+  const todos = await cursor.toArray();
+
+  res.json(todos);
 });
 
 
