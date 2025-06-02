@@ -1,9 +1,10 @@
-# Ignore all node_modules folders recursively
+# Ignore node_modules folders recursively
 **/node_modules/
 
+# Ignore all .env files recursively
+**/*.env
+
 # Optional ignores
-.env
 .DS_Store
 dist/
 build/
-
