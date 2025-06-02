@@ -43,7 +43,7 @@ todosRouter.patch("/update/:id", async (req: Request, res: Response) => {
     },
   };
 
-  await collection.updateOne(query, updateDoc);
+  await collection.updateOne(query, updateDoc, { upsert: true});
 
   // console.log(todoId)
 
