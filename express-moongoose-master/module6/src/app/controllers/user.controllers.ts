@@ -1,9 +1,7 @@
-import express, { Request, Response } from "express";
-import Note from "../models/notes.models";
+import { Request, Response } from "express";
 import { User } from "../models/user.models";
 
-
-// add new note
+// add new User
 export const addUser = async (req: Request, res: Response) => {
   const myUser = await req.body;
 
@@ -16,7 +14,7 @@ export const addUser = async (req: Request, res: Response) => {
   });
 };
 
-// get all notes
+// get all Users
 export const getUsers = async (req: Request, res: Response) => {
   const users = await User.find();
 
@@ -26,11 +24,11 @@ export const getUsers = async (req: Request, res: Response) => {
   });
 };
 
-// get single note
+// get single User
 export const getSingleUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
-  const user = await Note.findById(userId);
+  const user = await User.findById(userId);
 
   res.status(200).json({
     success: true,
@@ -38,14 +36,16 @@ export const getSingleUser = async (req: Request, res: Response) => {
   });
 };
 
-// update single note
+// update single User
 export const updateUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const myUser = req.body;
 
-  // const note = await Note.findByIdAndUpdate(userId, myNote, { new: true });
-  // const note = await Note.updateOne({ _id: userId }, myNote, { new: true });
-  const user = await User.findOneAndUpdate({ _id: userId}, myUser, { new: true });
+  // const user = await User.findByIdAndUpdate(userId, myUser, { new: true });
+  // const user = await User.updateOne({ _id: userId }, myUser, { new: true });
+  const user = await User.findOneAndUpdate({ _id: userId }, myUser, {
+    new: true,
+  });
   res.status(200).json({
     success: true,
     message: "User Updated Successfuly",
@@ -53,14 +53,13 @@ export const updateUser = async (req: Request, res: Response) => {
   });
 };
 
-
-// delete single note
+// delete single User
 export const deleteUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
-  // const note = await Note.findByIdAndDelete(noteId);
+  // const user = await User.findByIdAndDelete(UserId);
   const user = await User.deleteOne({ _id: userId });
-  // const note = await Note.findOneAndDelete({ _id: userId});
+  // const user = await User.findOneAndDelete({ _id: userId});
   res.status(200).json({
     success: true,
     message: "User Deleted Successfuly",
