@@ -3,11 +3,11 @@ import { addNotes, deleteNote, getNotes, getSingleNote, updateNote } from "../co
 const notesRouter = express.Router()
 
 
-notesRouter.post("/notes/create-note", addNotes);
-notesRouter.get("/notes", getNotes);
-notesRouter.get("/notes/:noteId", getSingleNote);
-notesRouter.patch("/notes/updateNote/:noteId", updateNote);
-notesRouter.delete("/notes/deleteNote/:noteId", deleteNote);
+notesRouter.post("/create-note", addNotes);
+notesRouter.get("/", getNotes);
+notesRouter.get("/:noteId", getSingleNote);
+notesRouter.patch("/updateNote/:noteId", updateNote);
+notesRouter.delete("/deleteNote/:noteId", deleteNote);
 
 
 export default notesRouter;

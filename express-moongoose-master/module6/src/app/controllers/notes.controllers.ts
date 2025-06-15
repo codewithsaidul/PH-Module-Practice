@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import Note from "../models/notes.models";
 
-export const notesRouter = express.Router()
-
 
 // add new note
 export const addNotes = async (req: Request, res: Response) => {
@@ -75,7 +73,7 @@ export const deleteNote = async (req: Request, res: Response) => {
   // const note = await Note.findOneAndDelete({ _id: noteId});
   res.status(200).json({
     success: true,
-    message: "Note Updated Successfuly",
+    message: "Note Deleted Successfuly",
     note,
   });
 };
