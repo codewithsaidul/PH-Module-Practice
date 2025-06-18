@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import Note from "../models/notes.models";
 
 
@@ -28,7 +28,7 @@ export const addNotes = async (req: Request, res: Response) => {
 
 // get all notes
 export const getNotes = async (req: Request, res: Response) => {
-  const notes = await Note.find();
+  const notes = await Note.find().populate("userId");
 
   res.status(200).json({
     success: true,
