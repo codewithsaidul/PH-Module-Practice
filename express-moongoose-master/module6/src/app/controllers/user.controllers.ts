@@ -1,17 +1,35 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.models";
+import { z } from "zod";
+
+const CreateUserZodShcema = z.object({
+  firstName: z.string(),
+  lastName: z.string(),
+  age: z.number(),
+  email: z.string(),
+  password: z.string(),
+  role: z.string().optional(),
+});
 
 // add new User
 export const addUser = async (req: Request, res: Response) => {
-  const myUser = await req.body;
+  try {
+    const myUser = await CreateUserZodShcema.parseAsync(req.body);
 
-  const user = await User.create(myUser);
+    const user = await User.create(myUser);
 
-  res.status(200).json({
-    success: true,
-    message: "User Created Successfully",
-    user: user,
-  });
+
+    res.status(200).json({
+      success: true,
+      message: "User Created Successfully",
+      user: user,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error,
+    });
+  }
 };
 
 // get all Users
