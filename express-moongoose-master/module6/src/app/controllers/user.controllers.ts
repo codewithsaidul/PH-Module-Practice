@@ -14,7 +14,8 @@ const CreateUserZodShcema = z.object({
 // add new User
 export const addUser = async (req: Request, res: Response) => {
   try {
-    const myUser = await CreateUserZodShcema.parseAsync(req.body);
+    // const myUser = await CreateUserZodShcema.parseAsync(req.body);
+    const myUser = await req.body;
 
     const user = await User.create(myUser);
 
