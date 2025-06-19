@@ -4,11 +4,11 @@ const userRouter = express.Router();
 
 
 
-userRouter.post("/create-user", addUser);
 userRouter.get("/", getUsers);
 userRouter.get("/:userId", getSingleUser);
 userRouter.patch("/updateUser/:userId", updateUser);
 userRouter.delete("/deleteUser/:userId", deleteUser);
+userRouter.post("/create-user", addUser);
 
 
 export default userRouter;

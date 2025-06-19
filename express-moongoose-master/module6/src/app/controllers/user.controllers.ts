@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { User } from "../models/user.models";
 import { z } from "zod";
+import bcrypt from "bcrypt"
 
 const CreateUserZodShcema = z.object({
   firstName: z.string(),
@@ -14,10 +15,22 @@ const CreateUserZodShcema = z.object({
 // add new User
 export const addUser = async (req: Request, res: Response) => {
   try {
-    // const myUser = await CreateUserZodShcema.parseAsync(req.body);
-    const myUser = await req.body;
 
-    const user = await User.create(myUser);
+    // const myUser = await CreateUserZodShcema.parseAsync(req.body);
+    const myUser = req.body;
+
+     
+    //  const pass = await bcrypt.hash(req.body.password, 10);
+    //  myUser.password = pass;
+
+    //  const user = await User.create(myUser);
+    const user = new User(myUser);
+
+    const pass = await user.hashPassword(myUser.password);
+
+    user.password = pass;
+
+    await user.save();
 
 
     res.status(200).json({

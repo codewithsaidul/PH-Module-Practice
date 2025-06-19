@@ -7,13 +7,7 @@ export const addNotes = async (req: Request, res: Response) => {
   const note = await req.body;
 
   // approuch-1 for creating a data with mongoose
-  // const myNote = new Note({
-  //   title: "Learning Redux",
-  //   tags: {
-  //     label: "redux",
-  //     color: "blue"
-  //   }
-  // })
+  // const myNote = new Note(note);
   // await myNote.save();
 
   // approuch-2 for creating a data with mongoose
