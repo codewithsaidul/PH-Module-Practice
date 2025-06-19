@@ -67,15 +67,25 @@ const userSchema = new Schema<IUser, UserStaticMethod, UserInstanceMethod>(
 );
 
 
-userSchema.static("hashPassword", async function hashPassword(pass: string) {
-  const password = await bcrypt.hash(pass, 10);
-  return password
+// userSchema.static("hashPassword", async function hashPassword(pass: string) {
+//   const password = await bcrypt.hash(pass, 10);
+//   return password
+// })
+
+
+// userSchema.method("hashPassword", async function hashPassword(pass: string) {
+//   const password = await bcrypt.hash(pass, 10);
+//   return password
+// })
+
+userSchema.pre('save', async function () {
+  this.password = await bcrypt.hash(this.password, 10);
 })
 
 
-userSchema.method("hashPassword", async function hashPassword(pass: string) {
-  const password = await bcrypt.hash(pass, 10);
-  return password
+userSchema.post('save', function (doc) {
+  console.log('%s has been saved successfully!', doc._id)
 })
+
 
 export const User = model<IUser, UserStaticMethod>("User", userSchema);

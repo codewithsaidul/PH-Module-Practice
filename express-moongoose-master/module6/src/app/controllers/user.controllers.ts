@@ -24,8 +24,9 @@ export const addUser = async (req: Request, res: Response) => {
     //  myUser.password = pass;
 
     // TODO: Custom & Built in static method
-    const pass = await User.hashPassword(myUser.password);
-    myUser.password = pass
+    // const pass = await User.hashPassword(myUser.password);
+    // myUser.password = pass
+    
      const user = await User.create(myUser);
 
     // TODO: Custom & Built in instance method
