@@ -23,14 +23,17 @@ export const addUser = async (req: Request, res: Response) => {
     //  const pass = await bcrypt.hash(req.body.password, 10);
     //  myUser.password = pass;
 
-    //  const user = await User.create(myUser);
-    const user = new User(myUser);
+    // TODO: Custom & Built in static method
+    const pass = await User.hashPassword(myUser.password);
+    myUser.password = pass
+     const user = await User.create(myUser);
 
+    // TODO: Custom & Built in instance method
+    /* const user = new User(myUser);
     const pass = await user.hashPassword(myUser.password);
-
     user.password = pass;
-
     await user.save();
+    */
 
 
     res.status(200).json({
