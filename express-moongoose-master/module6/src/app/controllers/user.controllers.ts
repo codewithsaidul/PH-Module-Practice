@@ -26,7 +26,7 @@ export const addUser = async (req: Request, res: Response) => {
     // TODO: Custom & Built in static method
     // const pass = await User.hashPassword(myUser.password);
     // myUser.password = pass
-    
+
      const user = await User.create(myUser);
 
     // TODO: Custom & Built in instance method
@@ -94,8 +94,11 @@ export const deleteUser = async (req: Request, res: Response) => {
   const { userId } = req.params;
 
   // const user = await User.findByIdAndDelete(UserId);
-  const user = await User.deleteOne({ _id: userId });
-  // const user = await User.findOneAndDelete({ _id: userId});
+  // const user = await User.deleteOne({ _id: userId });
+
+  const user = await User.findOneAndDelete({ _id: userId});
+
+  
   res.status(200).json({
     success: true,
     message: "User Deleted Successfuly",

@@ -22,7 +22,7 @@ export const addNotes = async (req: Request, res: Response) => {
 
 // get all notes
 export const getNotes = async (req: Request, res: Response) => {
-  const notes = await Note.find().populate("userId");
+  const notes = await Note.find().populate("user");
 
   res.status(200).json({
     success: true,

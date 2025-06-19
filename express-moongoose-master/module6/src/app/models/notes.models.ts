@@ -16,7 +16,7 @@ const noteSchema = new Schema<INotes>(
       label: { type: String, required: true },
       color: { type: String, default: "gray" },
     },
-    userId: { type: Schema.Types.ObjectId, ref: "User" },
+    user: { type: Schema.Types.ObjectId, ref: "User" },
   },
   {
     versionKey: false,

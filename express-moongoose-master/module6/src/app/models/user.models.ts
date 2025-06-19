@@ -1,16 +1,25 @@
-import bcrypt from "bcrypt"
-import { Model, model, Schema } from "mongoose";
-import { IAddress, IUser, UserInstanceMethod, UserStaticMethod } from "../interface/user.interface";
+import bcrypt from "bcrypt";
+import { model, Schema } from "mongoose";
 import validator from "validator";
+import {
+  IAddress,
+  IUser,
+  UserInstanceMethod,
+  UserStaticMethod,
+} from "../interface/user.interface";
+import Note from "./notes.models";
 
-const addressSchema = new Schema<IAddress>({
+const addressSchema = new Schema<IAddress>(
+  {
     street: String,
     city: String,
     country: String,
-    zip: Number
-}, {
-  _id: false
-});
+    zip: Number,
+  },
+  {
+    _id: false,
+  }
+);
 
 const userSchema = new Schema<IUser, UserStaticMethod, UserInstanceMethod>(
   {
@@ -58,7 +67,7 @@ const userSchema = new Schema<IUser, UserStaticMethod, UserInstanceMethod>(
       },
       default: "USER",
     },
-    address: { type: addressSchema }
+    address: { type: addressSchema },
   },
   {
     versionKey: false,
@@ -66,26 +75,35 @@ const userSchema = new Schema<IUser, UserStaticMethod, UserInstanceMethod>(
   }
 );
 
-
 // userSchema.static("hashPassword", async function hashPassword(pass: string) {
 //   const password = await bcrypt.hash(pass, 10);
 //   return password
 // })
-
 
 // userSchema.method("hashPassword", async function hashPassword(pass: string) {
 //   const password = await bcrypt.hash(pass, 10);
 //   return password
 // })
 
-userSchema.pre('save', async function () {
+userSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, 10);
-})
+});
 
+// document post hooks middleware
+userSchema.post("save", function (doc) {
+  console.log("%s has been saved successfully!", doc._id);
+});
 
-userSchema.post('save', function (doc) {
-  console.log('%s has been saved successfully!', doc._id)
-})
+// query pre hook middleware
+userSchema.pre("find", function (next) {
+  next();
+});
 
+userSchema.post("findOneAndDelete", async function (doc) {
+  if (doc) {
+    console.log(doc);
+    await Note.deleteMany({ user: doc._id });
+  }
+});
 
 export const User = model<IUser, UserStaticMethod>("User", userSchema);
